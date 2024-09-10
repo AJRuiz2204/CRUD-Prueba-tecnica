@@ -30,35 +30,33 @@ app.post("/student", (req, res) => {
   });
 });
 
-
 app.get("/read/:id", (req, res) => {
-    const sql = "SELECT * FROM student WHERE id = ?";
-    const id = req.params.id;
+  const sql = "SELECT * FROM student WHERE id = ?";
+  const id = req.params.id;
 
-    db.query(sql,[id], (err, result) => {
-      if (err) return res.json({ Message: "Error inside server" });
-      else res.json(result);
-    });
+  db.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Message: "Error inside server" });
+    else res.json(result);
   });
+});
 
 app.put("/update/:id", (req, res) => {
-    const sql = "UPDATE student SET `name` = ?, `email` = ? WHERE id = ?";
-    const id = req.params.id;
-    db.query(sql, [req.body.name, req.body.email, id], (err, result) => {
-        if (err) return res.json({Mesagge: "Error inside server"});
-        return res.json(result);
-    });
+  const sql = "UPDATE student SET `name` = ?, `email` = ? WHERE id = ?";
+  const id = req.params.id;
+  db.query(sql, [req.body.name, req.body.email, id], (err, result) => {
+    if (err) return res.json({ Mesagge: "Error inside server" });
+    return res.json(result);
   });
+});
 
 app.delete("/delete/:id", (req, res) => {
-    const sql = "DELETE FROM student WHERE id = ?";
-    const id = req.params.id;
-    db.query(sql, [ id], (err, result) => {
-        if (err) return res.json({Mesagge: "Error inside server"});
-        return res.json(result);
-    });
+  const sql = "DELETE FROM student WHERE id = ?";
+  const id = req.params.id;
+  db.query(sql, [id], (err, result) => {
+    if (err) return res.json({ Mesagge: "Error inside server" });
+    return res.json(result);
   });
-
+});
 
 app.listen(8081, () => {
   console.log("Server is running on port 8081");
